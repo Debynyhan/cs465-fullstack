@@ -7,6 +7,8 @@ const logger = require('morgan');
 const indexRouter = require('./app_server/routes/index');
 const usersRouter = require('./app_server/routes/users');
 const travelRouter = require('./app_server/routes/travel');
+const roomsRouter = require('./app_server/routes/rooms');
+const newsRouter = require('./app_server/routes/news');
 const handlebars = require('hbs');
 
 const app = express();
@@ -15,7 +17,20 @@ const app = express();
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 
 // register handlebars partials
-handlebars.registerPartials(path.join(__dirname + '/app_server/views/partials'));
+handlebars.registerPartials(__dirname + '/app_server/views/partials');
+
+// Define the active handle bar helder
+handlebars.registerHelper("activePage", function (title, options) {
+  const currentPage = options.data.root.currentPage;
+
+  if (currentPage === title) {
+    return new handlebars.SafeString("selected active");
+
+  } else {
+    return "";
+  }
+
+});
 
 app.set('view engine', 'hbs');
 
@@ -30,6 +45,9 @@ console.log('Resolved public path:', path.join(__dirname, 'public'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
+app.use('/rooms', roomsRouter);
+app.use('/news', newsRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
