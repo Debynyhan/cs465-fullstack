@@ -323,6 +323,7 @@ hr {
   position: absolute;
   left: 0;
   bottom: 0;
+  
 }
 #foods li > div.infos p span {
   display: block;
@@ -336,6 +337,7 @@ hr {
   position: absolute;
   left: 0;
   top: 0;
+  
 }
 #foods li > div.infos:hover p {
   display: block;

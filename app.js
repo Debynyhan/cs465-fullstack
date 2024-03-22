@@ -9,6 +9,7 @@ const usersRouter = require('./app_server/routes/users');
 const travelRouter = require('./app_server/routes/travel');
 const roomsRouter = require('./app_server/routes/rooms');
 const newsRouter = require('./app_server/routes/news');
+const mealsRouter = require('./app_server/routes/meals');
 const handlebars = require('hbs');
 
 const app = express();
@@ -47,6 +48,7 @@ app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
 app.use('/rooms', roomsRouter);
 app.use('/news', newsRouter);
+app.use('/meals', mealsRouter);
 
 
 // catch 404 and forward to error handler
