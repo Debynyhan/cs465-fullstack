@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const host = process.env.DB_HOST || '127.0.0.1';
 const dbURI = `mongodb://${host}/travlr`;
-const readLine = require('readline');
+
+//const readLine = require('readline');
+
 // Build the connection string and set the connection timeout.
 // timeout is in milliseconds.
 const connect = () => {
@@ -18,22 +20,25 @@ mongoose.connection.on('error', err => {
 mongoose.connection.on('disconnected', () => {
     console.log('Mongoose disconnected');
 });
+
 // Windows specific listner
-if (process.platform === 'win32') {
-    const r1 = readLine.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    r1.on('SIGINT', () => {
-        process.emit("SIGINT");
-    });
-}
+// if (process.platform === 'win32') {
+//     const r1 = readLine.createInterface({
+//         input: process.stdin,
+//         output: process.stdout
+//     });
+//     r1.on('SIGINT', () => {
+//         process.emit("SIGINT");
+//     });
+// }
+
 // Configure for Graceful Shutdown
 const gracefulShutdown = (msg) => {
     mongoose.connection.close(() => {
         console.log(`Mongoose disconnected through ${msg}`);
     });
 };
+
 // Event Listeners to process graceful shutdowns
 // Shutdown invoked by nodemon signal
 process.once('SIGUSR2', () => {
