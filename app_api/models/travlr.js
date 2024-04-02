@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const tripSchema = new mongoose.Schema({
     code: {
         type: String,
-        required: true, 
+        required: true,
         index: true
     },
     name: {
@@ -28,7 +28,7 @@ const tripSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    
+
     image: {
         type: String,
         required: true
